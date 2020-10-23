@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Controllers - Raycast Games MVC UI Framework</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Controllers";
+    var mkdocs_page_input_path = "controllers.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/csharp.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Raycast Games MVC UI Framework</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Controllers</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-a-controller">What is a "Controller"?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-a-controller-to-your-ui">Adding a controller to your UI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#binding">Binding</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../modifiers/">Modifiers</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Raycast Games MVC UI Framework</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Controllers</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/AyphixLLC/RayUI.git/edit/master/docs/controllers.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="controllers">Controllers</h1>
+<h2 id="what-is-a-controller">What is a "Controller"?</h2>
+<p>A controller in RAYUI is just a C# script that inherits from RaycastGames.Controller this file is then read by the <a href="../modifiers/">modifiers</a> to present you with options to bind your UI widgets to. It also handles any clicked or changed callbacks, all bound variables are Two-Way Bound.</p>
+<h2 id="example">Example</h2>
+<p>I'm going to show you an example controller first so you can see just how easy it is to write a Controller in RAYUI.</p>
+<pre><code class="language-cs">using UnityEngine;
+using RaycastGames;
+
+namespace MyGame {
+    public class MyController : Controller {
+        public string MyBoundString = &quot;&quot;;
+        public bool MyBoundBool = false;
+        public int MyBoundInt = 1;
+        public float MyBoundFloat = 0.1f;
+
+        public void MyBoundBoolChanged() {
+            Debug.Log(&quot;My Bool Changed to: &quot; + this.MyBoundBool);
+        }
+
+        public void MyButtonClicked() {
+            Debug.Log(&quot;Button Clicked&quot;);
+        }
+    }
+}
+</code></pre>
+<h2 id="adding-a-controller-to-your-ui">Adding a controller to your UI</h2>
+<p>Controllers are powerful! A Controller holds your bound variables and also handles your events from your UI. To add a controller to your UI simply add UIManager as a component to your base canvas entity and then choose where your controller should be. Your controller <strong>must</strong> be a parent of the UI you want to bind, the modifiers will traverse up and use the first controller they find. This allows you to have multiple controllers in your UI, for our current purposes we are going to apply our MyController Controller to our canvas to act as our base controller. But nothing is stopping us from creating a window UI element, and then putting a controller on the Window element. This would allow you to do things like have your base controller show/hide your inventory window, player equipment window, etc... Then have a sepparate controller for the inventory window functionality.</p>
+<p><img alt="Adding Controller" src="../img/controller/apply_controller.png" /></p>
+<h2 id="binding">Binding</h2>
+<p>What is "Binding" and what does "Two-Way binding" even mean?</p>
+<p>Let's look at a simple example. Let's say you had a TextBox (known as a InputField in Unity) and you wanted to bind it to MyBoundString on our controller. We would use a Ray_model to do this, which you would simply add as a component to your InputField. The Ray_Model will automatically traverse up and use the first Controller it can find, in our case it's on our canvas.</p>
+<p>(the images will be smaller after this one, I promise)</p>
+<p><img alt="Ray_model" src="../img/controller/ray_model_input_field.png" /></p>
+<p>Ok, we see that it's using the MyController script attached to the canvas. Perfect! This is what we expected/wanted, next let's tell it what field we want to observe.</p>
+<p><img alt="Ray_model" src="../img/controller/ray_model_select_field.png" />
+<img alt="Ray_model" src="../img/controller/ray_model_selected_field.png" /></p>
+<p>Awesome, we see that our Ray_model is using the right Controller and is bound to the correct field. Let's click on Canvas scroll down to our Controller and watch as we type into our input field.</p>
+<p>(Ok, I lied, this image is HUGE)</p>
+<p><img alt="Ray_model" src="../img/controller/two_way_binding.png" /></p>
+<p>You can see that when we type into our input field, the field MyBoundString reflects the changes on our MyController component. If you modify the field in the inspector watch the input field and you will see the input field will also change this is why it's known as Two-Way-Binding I'll show you just one of the useful ways to use this in the <a href="../examples/">examples</a> section. If you want a challenge, add a text widget above the input, bound it to MyBoundString with a Ray_Model and you'll see that it changes as you type. You'll be able to see the performance of the binding system this way as well.</p>
+<p>First though, let's work with our on-changed events. Add a toggle to our canvas and Ray_model bind it to MyBoundBool then add a Ray_on_change component to your input field and set the binding method to MyBoundBoolChanged this method could be named anything but I kept the names as close to the bounded fields as possible to make it easier to understand.</p>
+<p><img alt="Ray_on_change" src="../img/controller/ray_on_change_toggle.png" /></p>
+<p>Click our canvas element scroll down to our MyController component and run the game, we see that our toggle becomes unchecked immediately. When we check the toggle you'll see that the controller field MyBoundBool updates to checked and then we see in our console "My Bool Changed to: True"</p>
+<p><img alt="Ray_on_change" src="../img/controller/ray_on_change_toggle_on.png" /></p>
+<p>The changed event execution is delayed by 10 milliseconds to allow the binding updates to take place first. This does not spawn another thread nor does it delay the exectuion of our  other game functions so it's safe to use during heavy computations.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modifiers/" class="btn btn-neutral float-right" title="Modifiers">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Raycast Games LLC™ 2020</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/AyphixLLC/RayUI.git/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../modifiers/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
