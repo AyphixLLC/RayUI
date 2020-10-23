@@ -106,12 +106,7 @@
                 <h1 id="examples">Examples</h1>
 <h2 id="phone-number-field-example-of-two-way-binding">Phone number field (example of two-way binding)</h2>
 <p>First, start by creating a input field, TextMeshPro or Default make sure you set the type to integer field. Then add another text field into the Text Area and set it to fill the space. Set the first text entity to 0 font-size and then the new one to whatever seems to fit well. Then, create a panel, put the input field inside of it and create a new controller with this code.</p>
-<pre><code class="language-cs">///-----------------------------------------------------------------
-///   Author : Raycast Games LLC
-///   Date   : 10/23/2020 16:15
-///-----------------------------------------------------------------
-
-using System;
+<pre><code class="language-cs">using System;
 using System.Collections;
 using UnityEngine;
 
@@ -122,7 +117,7 @@ namespace MyGame {
 
         public void NumberChanged() {
             try{
-                this.MaskedNumber = String.Format(&quot;{0:# (###) ###-####}&quot;, Int64.Parse(this.PhoneNumber));
+                this.MaskedNumber = String.Format(&quot;{0,11:0 (000) 000-0000}&quot;, Int64.Parse(this.PhoneNumber));
             }catch(Exception e) {
                 Debug.Log(e);
             }
