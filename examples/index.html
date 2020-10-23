@@ -63,7 +63,7 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#phone-number-field">Phone number field</a>
+    <li class="toctree-l2"><a class="reference internal" href="#phone-number-field-example-of-two-way-binding">Phone number field (example of two-way binding)</a>
     </li>
     </ul>
                     </li>
@@ -104,7 +104,7 @@
             <div class="section">
               
                 <h1 id="examples">Examples</h1>
-<h2 id="phone-number-field">Phone number field</h2>
+<h2 id="phone-number-field-example-of-two-way-binding">Phone number field (example of two-way binding)</h2>
 <p>First, start by creating a input field, TextMeshPro or Default make sure you set the type to integer field. Then add another text field into the Text Area and set it to fill the space. Set the first text entity to 0 font-size and then the new one to whatever seems to fit well. Then, create a panel, put the input field inside of it and create a new controller with this code.</p>
 <pre><code class="language-cs">///-----------------------------------------------------------------
 ///   Author : Raycast Games LLC
@@ -132,6 +132,7 @@ namespace MyGame {
 </code></pre>
 <p>Then Put a Ray Model on the input field and bind it to PhoneNumber and put a Ray On Change on the input field as make it call the NumberChanged() method. After that go to the text field you created, and add a Ray Model to it and bind it to the Masked Number field. Now when you run the game, your text field will automagically mask your phone number for you.</p>
 <p><img alt="result" src="../img/examples/result.png" /></p>
+<p>It's not perfect but if you put a little work into it, you can make it feel like a professional UI widget with little effort.</p>
               
             </div>
           </div>
